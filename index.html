@@ -11,24 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'nava-rose': '#C59A8F',
-                        'nava-gold': '#C5A059',
-                        'nava-dark': '#2D2D2D',
-                        'nava-light': '#F9F7F7',
-                    },
-                    fontFamily: {
-                        'serif': ['"Playfair Display"', 'serif'],
-                        'sans': ['"Lato"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         html { scroll-behavior: smooth; }
         .hero-overlay {
@@ -53,7 +35,43 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(197, 154, 143, 0.15);
         }
+
+        @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+        }
+    
+        .animate-scroll {
+        /* السرعة في الكمبيوتر (بطيئة وهادئة) */
+        animation: scroll 40s linear infinite;
+        }
+
+        /* تعديل السرعة للجوال (أسرع قليلاً ليناسب الشاشة الصغيرة) */
+        @media (max-width: 768px) {
+        .animate-scroll {
+            animation: scroll 15s linear infinite; 
+        }
+    }
     </style>
+
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nava-rose': '#C59A8F',
+                        'nava-gold': '#C5A059',
+                        'nava-dark': '#2D2D2D',
+                        'nava-light': '#F9F7F7',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="font-sans text-nava-dark bg-white antialiased">
 
@@ -71,10 +89,14 @@
                     <a href="#services" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Services</a>
                     <a href="#location" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Location</a>
                     <a href="#hours" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Hours</a>
+                    <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer"
+                       class="bg-nava-rose text-white px-5 py-2 text-[10px] lg:text-xs tracking-widest uppercase hover:bg-nava-dark transition-colors duration-300">
+                        Book Now
+                    </a>
                 </div>
 
-                <div class="md:hidden">
-                    <button class="text-nava-dark p-2" id="mobile-menu-button">
+               <div class="md:hidden">
+                    <button class="text-nava-dark p-2" id="mobile-menu-button" aria-label="Open navigation menu">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -101,8 +123,8 @@
                 Hours
                 <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
             </a>
-            <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer"
-                class="bg-nava-rose text-white px-5 py-2 text-[10px] lg:text-xs tracking-widest uppercase hover:bg-nava-dark transition-colors duration-300">
+                <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer"
+                class="mobile-link bg-nava-rose text-white px-8 py-4 text-sm tracking-widest uppercase">
                 Book Now
             </a>
         </nav>
@@ -308,26 +330,7 @@
     </div>
 </div>
 
-<style>
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    
-    .animate-scroll {
-        /* السرعة في الكمبيوتر (بطيئة وهادئة) */
-        animation: scroll 40s linear infinite;
-    }
-
-    /* تعديل السرعة للجوال (أسرع قليلاً ليناسب الشاشة الصغيرة) */
-    @media (max-width: 768px) {
-        .animate-scroll {
-            animation: scroll 15s linear infinite; 
-        }
-    }
-</style>
-
-    <section id="booking" class="py-20 bg-white">
+<section id="booking" class="py-20 bg-white">
     <div class="max-w-4xl mx-auto px-4">
         <div class="relative bg-nava-light rounded-3xl p-8 md:p-16 overflow-hidden shadow-sm border border-nava-rose/10" data-aos="zoom-in">
             
