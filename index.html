@@ -1,56 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nava Salon Jeddah | Luxury Beauty & Spa</title>
     <meta name="description" content="Nava Salon is a luxury beauty salon & spa in Jeddah offering a private, elegant experience with international experts.">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- FIX: Moved all styles into <head> -->
     <style>
         html { scroll-behavior: smooth; }
 
-        .hero-overlay {
-            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
-        }
+        body { font-family: 'Tajawal', sans-serif; transition: all 0.3s ease; }
+        [lang="en"] body { font-family: 'Lato', sans-serif; }
+
         .fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
         }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
         .delay-100 { animation-delay: 0.2s; }
         .delay-200 { animation-delay: 0.4s; }
         .delay-300 { animation-delay: 0.6s; }
-        
-        .service-detail-card {
-            transition: all 0.3s ease;
-        }
-        .service-detail-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(197, 154, 143, 0.15);
-        }
 
-        /* FIX: Moved marquee animation from mid-body <style> to <head> */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-scroll {
-            animation: scroll 40s linear infinite;
-        }
-        @media (max-width: 768px) {
-            .animate-scroll {
-                animation: scroll 15s linear infinite;
-            }
-        }
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(197,154,143,0.15); }
+
+        @keyframes scroll-rtl { 0%{transform:translateX(0)} 100%{transform:translateX(50%)} }
+        @keyframes scroll-ltr { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        .animate-scroll { animation: scroll-rtl 40s linear infinite; }
+        [dir="ltr"] .animate-scroll { animation: scroll-ltr 40s linear infinite; }
+        @media(max-width:768px){ .animate-scroll{ animation-duration:15s; } }
+
+        /* Language pill */
+        .lang-toggle { display:flex; align-items:center; background:#f3eeec; border-radius:9999px; padding:3px; gap:2px; }
+        .lang-btn { padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:700; cursor:pointer; transition:all 0.25s; color:#9a8070; border:none; background:transparent; }
+        .lang-btn.active { background:#C59A8F; color:white; box-shadow:0 1px 4px rgba(197,154,143,0.4); }
+
+        /* RTL-aware serif */
+        [dir="rtl"] .font-serif { font-family:'Tajawal', serif; font-weight:700; }
+        [dir="ltr"] .font-serif { font-family:'Playfair Display', serif; }
+
+        /* Flip external-link icon in RTL */
+        [dir="rtl"] .icon-flip { transform: scaleX(-1); display:inline-block; }
     </style>
 
     <script>
@@ -58,364 +54,417 @@
             theme: {
                 extend: {
                     colors: {
-                        'nava-rose': '#C59A8F',
-                        'nava-gold': '#C5A059',
-                        'nava-dark': '#2D2D2D',
-                        'nava-light': '#F9F7F7',
+                        'nava-rose':'#C59A8F','nava-gold':'#C5A059','nava-dark':'#2D2D2D','nava-light':'#F9F7F7'
                     },
                     fontFamily: {
-                        'serif': ['"Playfair Display"', 'serif'],
-                        'sans': ['"Lato"', 'sans-serif'],
+                        'serif':['"Playfair Display"','Tajawal','serif'],
+                        'sans':['Tajawal','Lato','sans-serif']
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="font-sans text-nava-dark bg-white antialiased">
+<body class="text-nava-dark bg-white antialiased">
 
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">    
-            <div class="flex justify-between items-center h-20">
-                <div class="h-16 w-32 flex items-center">
-                    <a href="#">
-                        <!-- FIX: Changed h-30 (invalid Tailwind class) to h-12 -->
-                        <img src="assets/logo.png" alt="Nava Logo" class="h-12 w-auto object-contain">
-                    </a>
-                </div>
+<!-- ===== NAVBAR ===== -->
+<nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
 
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="#about" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Our Story</a>
-                    <a href="#services" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Services</a>
-                    <a href="#location" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Location</a>
-                    <a href="#hours" class="text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest">Hours</a>
-                    <!-- IMPROVEMENT: Book Now CTA in navbar -->
-                    <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment."
-                       target="_blank" rel="noopener noreferrer"
-                       class="bg-nava-rose text-white px-5 py-2 text-[10px] lg:text-xs tracking-widest uppercase hover:bg-nava-dark transition-colors duration-300">
-                        Book Now
-                    </a>
-                </div>
-
-                <!-- FIX: Added aria-label for accessibility -->
-                <div class="md:hidden">
-                    <button class="text-nava-dark p-2" id="mobile-menu-button" aria-label="Open navigation menu">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+            <div class="h-16 w-32 flex items-center">
+                <a href="#"><img src="assets/logo.png" alt="Nava Logo" class="h-12 w-auto object-contain"></a>
             </div>
-        </div>
-    </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 md:hidden translate-x-full transition-transform duration-500 ease-in-out">
-        <div class="flex flex-col items-center justify-center h-full space-y-10 px-6">        
-            <nav class="flex flex-col items-center space-y-12">
-                <a href="#about" class="mobile-link relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase transition-all duration-500 hover:text-nava-rose hover:tracking-[0.3em]">
-                    Our Story
-                    <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                </a>
-                <a href="#services" class="mobile-link relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase transition-all duration-500 hover:text-nava-rose hover:tracking-[0.3em]">
-                    Services
-                    <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                </a>
-                <a href="#location" class="mobile-link relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase transition-all duration-500 hover:text-nava-rose hover:tracking-[0.3em]">
-                    Location
-                    <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                </a>
-                <a href="#hours" class="mobile-link relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase transition-all duration-500 hover:text-nava-rose hover:tracking-[0.3em]">
-                    Hours
-                    <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                </a>
-                <!-- IMPROVEMENT: Book Now in mobile menu too -->
-                <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment."
+            <!-- Desktop nav -->
+            <div class="hidden md:flex items-center gap-6 lg:gap-8">
+                <a href="#about"    class="i18n text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest" data-ar="قصتنا"      data-en="Our Story">قصتنا</a>
+                <a href="#services" class="i18n text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest" data-ar="خدماتنا"     data-en="Services">خدماتنا</a>
+                <a href="#location" class="i18n text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest" data-ar="موقعنا"      data-en="Location">موقعنا</a>
+                <a href="#hours"    class="i18n text-nava-dark hover:text-nava-rose transition font-medium uppercase text-[10px] lg:text-xs tracking-widest" data-ar="أوقات العمل" data-en="Hours">أوقات العمل</a>
+                <a id="nav-book"
+                   href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
                    target="_blank" rel="noopener noreferrer"
-                   class="mobile-link bg-nava-rose text-white px-8 py-4 text-sm tracking-widest uppercase">
-                   Book Now
+                   class="i18n bg-nava-rose text-white px-5 py-2 text-[10px] lg:text-xs tracking-widest uppercase hover:bg-nava-dark transition-colors duration-300"
+                   data-ar="احجزي الآن" data-en="Book Now"
+                   data-ar-href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
+                   data-en-href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment.">احجزي الآن</a>
+                <div class="lang-toggle">
+                    <button class="lang-btn"        id="btn-ar"     onclick="setLang('ar')">AR</button>
+                    <button class="lang-btn active" id="btn-en"     onclick="setLang('en')">EN</button>
+                </div>
+            </div>
+
+            <!-- Mobile controls -->
+            <div class="md:hidden flex items-center gap-3">
+                <div class="lang-toggle">
+                    <button class="lang-btn"        id="btn-ar-m"   onclick="setLang('ar')">AR</button>
+                    <button class="lang-btn active" id="btn-en-m"   onclick="setLang('en')">EN</button>
+                </div>
+                <button class="text-nava-dark p-2" id="mob-btn" aria-label="فتح القائمة">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-white z-40 md:hidden translate-x-full transition-transform duration-500 ease-in-out">
+    <div class="flex flex-col items-center justify-center h-full space-y-10 px-6">
+        <nav class="flex flex-col items-center space-y-12">
+            <a href="#about"    class="mob-link i18n relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase hover:text-nava-rose transition-all duration-500" data-ar="قصتنا"      data-en="Our Story">قصتنا<span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span></a>
+            <a href="#services" class="mob-link i18n relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase hover:text-nava-rose transition-all duration-500" data-ar="خدماتنا"     data-en="Services">خدماتنا<span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span></a>
+            <a href="#location" class="mob-link i18n relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase hover:text-nava-rose transition-all duration-500" data-ar="موقعنا"      data-en="Location">موقعنا<span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span></a>
+            <a href="#hours"    class="mob-link i18n relative group text-2xl font-serif text-nava-dark tracking-[0.2em] uppercase hover:text-nava-rose transition-all duration-500" data-ar="أوقات العمل" data-en="Hours">أوقات العمل<span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-nava-rose transition-all duration-300 group-hover:w-full group-hover:left-0"></span></a>
+            <a id="mob-book"
+               href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
+               target="_blank" rel="noopener noreferrer"
+               class="mob-link bg-nava-rose text-white px-8 py-4 text-sm tracking-widest uppercase"
+               data-ar-href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
+               data-en-href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment.">
+                <i class="fab fa-whatsapp me-2"></i><span class="i18n" data-ar="احجزي الآن" data-en="Book Now">احجزي الآن</span>
+            </a>
+        </nav>
+    </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="relative h-[100vh] flex items-center overflow-hidden bg-[#1a1a1a]">
+    <div class="absolute inset-0 z-0">
+        <img src="assets/bg.jpg" alt="Nava Salon Interior" class="w-full h-full object-cover object-center md:object-[center_60%] scale-110 md:scale-100">
+        <div class="absolute inset-0 bg-black/40 md:bg-gradient-to-l md:from-black/80 md:via-black/20 md:to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full text-white">
+        <div class="max-w-3xl" data-aos="fade-left">
+            <p class="i18n text-nava-rose font-medium tracking-[0.2em] uppercase mb-4 text-xs sm:text-sm drop-shadow-md"
+               data-ar="أهلاً بكِ في صالون نافا للتجميل والسبا"
+               data-en="Welcome to Nava Beauty Salon & Spa">أهلاً بكِ في صالون نافا للتجميل والسبا</p>
+            <h1 class="i18n fade-in-up delay-100 font-serif text-5xl sm:text-6xl md:text-8xl font-bold leading-[1.2] mb-6 drop-shadow-xl"
+                data-ar="فنّ الجمال<br/>في جدة"
+                data-en="The Art of<br/>Jeddah Beauty">فنّ الجمال<br/>في جدة</h1>
+            <p class="i18n fade-in-up delay-200 text-base sm:text-lg md:text-xl text-gray-100 mb-8 font-light max-w-xl drop-shadow-md"
+               data-ar="وجهتكِ الراقية حيث تلتقي الأناقة والخصوصية والخبرة في مكان واحد"
+               data-en="A refined beauty destination where elegance, privacy, and expert care come together">وجهتكِ الراقية حيث تلتقي الأناقة والخصوصية والخبرة في مكان واحد</p>
+            <div class="fade-in-up delay-300">
+                <p class="i18n text-nava-rose tracking-widest uppercase text-[10px] sm:text-xs font-bold"
+                   data-ar="فخامة • خصوصية • احترافية"
+                   data-en="Luxury • Privacy • Expertise">فخامة • خصوصية • احترافية</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right" class="order-2 md:order-1">
+            <span class="i18n text-nava-rose font-medium tracking-widest uppercase text-xs mb-2 block" data-ar="قصتنا" data-en="Our Story">قصتنا</span>
+            <h2 class="i18n font-serif text-3xl md:text-4xl text-nava-dark mb-6 leading-snug"
+                data-ar="ملاذٌ للأناقة والهدوء في قلب جدة."
+                data-en="A Sanctuary of Style & Serenity in Jeddah.">ملاذٌ للأناقة والهدوء في قلب جدة.</h2>
+            <p class="i18n text-gray-700 leading-relaxed mb-4 text-sm md:text-base"
+               data-ar="في نافا، نؤمن أن الجمال فن والعناية بالنفس ضرورة. أسسنا الصالون بهدف تقديم تجربة راقية لا مثيل لها لسيدات جدة."
+               data-en="At Nava Salon, we believe beauty is an art and self-care is a necessity. Established with a vision to bring unparalleled luxury to the women of Jeddah.">في نافا، نؤمن أن الجمال فن والعناية بالنفس ضرورة. أسسنا الصالون بهدف تقديم تجربة راقية لا مثيل لها لسيدات جدة.</p>
+            <p class="i18n text-gray-700 leading-relaxed text-sm md:text-base"
+               data-ar="فريقنا من الخبراء الدوليين يضمن لكِ تجربة مصممة خصيصاً تخرجين منها بإحساس منعش وجمال يشعّ."
+               data-en="Our team of international stylists ensures a bespoke experience that leaves you feeling refreshed and beautiful.">فريقنا من الخبراء الدوليين يضمن لكِ تجربة مصممة خصيصاً تخرجين منها بإحساس منعش وجمال يشعّ.</p>
+        </div>
+        <div data-aos="fade-left" class="order-1 md:order-2">
+            <img src="assets/BgNava.png" alt="Salon" class="rounded-lg shadow-xl w-full h-auto object-cover border-4 border-nava-rose/30">
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="py-16 md:py-24 bg-nava-light/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="i18n text-nava-rose font-medium tracking-widest uppercase text-xs" data-ar="كل ما تحتاجينه" data-en="The Full Offering">كل ما تحتاجينه</span>
+            <h2 class="i18n font-serif text-4xl md:text-5xl text-nava-dark mt-2" data-ar="خدماتنا ذات المستوى العالمي" data-en="Our World-Class Services">خدماتنا ذات المستوى العالمي</h2>
+            <p class="i18n mt-4 text-lg max-w-3xl mx-auto text-gray-700"
+               data-ar="تشكيلة مختارة بعناية من تجارب التجميل والعافية، صُمّمت للمرأة العصرية."
+               data-en="A curated selection of beauty and wellness experiences, crafted for the modern woman.">تشكيلة مختارة بعناية من تجارب التجميل والعافية، صُمّمت للمرأة العصرية.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/hair.jpeg" alt="Hair" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="فن الشعر" data-en="Hair Artistry">فن الشعر</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="قص، صبغ وتصفيف على يد خبراء" data-en="Cut, Color & Style by Experts">قص، صبغ وتصفيف على يد خبراء</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/nails.jpeg" alt="Nails" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="العناية الفاخرة بالأظافر" data-en="Luxury Nail Care">العناية الفاخرة بالأظافر</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="مانيكير، باديكير وتركيبات جل" data-en="Manicures, Pedicures & Gel Extensions">مانيكير، باديكير وتركيبات جل</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="300">
+                <img src="assets/spa.jpeg" alt="Spa" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="سبا خاص" data-en="Private Spa">سبا خاص</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="مساج مريح وحمام مغربي" data-en="Relaxing Massages & Hammam">مساج مريح وحمام مغربي</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/Facials.jpeg" alt="Facials" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="جلسات بشرة متقدمة" data-en="Advanced Facials">جلسات بشرة متقدمة</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="هيدرا فيشل وتجديد الشباب" data-en="HydraFacial & Rejuvenation">هيدرا فيشل وتجديد الشباب</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/makeup.jpeg" alt="Makeup" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="مكياج احترافي" data-en="Professional Makeup">مكياج احترافي</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="مكياج العرائس والمناسبات" data-en="Bridal & Event Glam">مكياج العرائس والمناسبات</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="300">
+                <img src="assets/Lash.jpeg" alt="Lash" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
+                    <div>
+                        <h3 class="i18n font-serif text-3xl text-white mb-2" data-ar="بار الرموش والحواجب" data-en="Lash & Brow Bar">بار الرموش والحواجب</h3>
+                        <p class="i18n text-gray-200 text-sm opacity-90" data-ar="تمديد، رفع وتشكيل" data-en="Extensions, Lifts & Shaping">تمديد، رفع وتشكيل</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="relative py-10 bg-white overflow-hidden border-t border-b border-nava-gold/10">
+    <div class="flex whitespace-nowrap animate-scroll" id="marquee-track">
+        <div class="flex items-center gap-20 px-10">
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="استرخاء"   data-en="Relax">استرخاء</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="تجديد"     data-en="Refresh">تجديد</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="إشراق"     data-en="Renew">إشراق</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="تجربة نافا" data-en="Nava Experience">تجربة نافا</span>
+        </div>
+        <div class="flex items-center gap-20 px-10">
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="استرخاء"   data-en="Relax">استرخاء</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="تجديد"     data-en="Refresh">تجديد</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="إشراق"     data-en="Renew">إشراق</span>
+            <span class="i18n font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]" data-ar="تجربة نافا" data-en="Nava Experience">تجربة نافا</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== BOOKING CTA ===== -->
+<section id="booking" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="relative bg-nava-light rounded-3xl p-8 md:p-16 overflow-hidden shadow-sm border border-nava-rose/10" data-aos="zoom-in">
+            <div class="relative z-10 text-center">
+                <span class="i18n text-nava-rose font-medium tracking-[0.2em] uppercase text-xs mb-4 block"
+                      data-ar="حان وقت الاهتمام بنفسكِ" data-en="Time to Treat Yourself">حان وقت الاهتمام بنفسكِ</span>
+                <h2 class="i18n font-serif text-3xl md:text-5xl text-nava-dark mb-6 leading-tight"
+                    data-ar="هل أنتِ مستعدة<br>لإطلالة جديدة؟"
+                    data-en="Ready for a<br>New Look?">هل أنتِ مستعدة<br>لإطلالة جديدة؟</h2>
+                <p class="i18n text-gray-600 mb-10 max-w-lg mx-auto text-sm md:text-base leading-relaxed font-light"
+                   data-ar="احجزي موعدكِ اليوم واستمتعي بتجربة تجميل استثنائية. خبراؤنا هنا ليجعلوكِ تتألقين."
+                   data-en="Book your appointment today and enjoy a relaxing beauty experience. Our experts are here to make you shine.">احجزي موعدكِ اليوم واستمتعي بتجربة تجميل استثنائية. خبراؤنا هنا ليجعلوكِ تتألقين.</p>
+                <a id="cta-book"
+                   href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-3 bg-nava-dark text-white px-10 py-5 rounded-full hover:bg-nava-rose transition-all duration-300 transform hover:scale-105 shadow-xl tracking-widest uppercase text-xs font-bold"
+                   data-ar-href="https://wa.me/966536464555?text=مرحباً%20صالون%20نافا،%20أرغب%20في%20حجز%20موعد."
+                   data-en-href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment.">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    <span class="i18n" data-ar="احجزي عبر واتساب" data-en="Book via WhatsApp">احجزي عبر واتساب</span>
                 </a>
-            </nav>
-        </div>
-    </div>
-
-    <section class="relative h-[100vh] flex items-center overflow-hidden bg-[#1a1a1a]">
-        <div class="absolute inset-0 z-0">
-            <img src="assets/bg.jpg" alt="Nava Salon Interior" 
-                 class="w-full h-full object-cover object-center md:object-[center_60%] scale-110 md:scale-100">
-            <div class="absolute inset-0 bg-black/40 md:bg-gradient-to-r md:from-black/80 md:via-black/20 md:to-transparent"></div>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full text-white">
-            <div class="max-w-3xl" data-aos="fade-right">
-                <p class="text-nava-rose font-medium tracking-[0.2em] uppercase mb-4 text-xs sm:text-sm drop-shadow-md">
-                    Welcome to Nava Beauty Salon & Spa
-                </p>
-                <h1 class="fade-in-up delay-100 font-serif text-5xl sm:text-6xl md:text-8xl font-bold leading-[1.1] mb-6 drop-shadow-xl">
-                    The Art of <br/> Jeddah Beauty.
-                </h1>
-                <p class="fade-in-up delay-200 text-base sm:text-lg md:text-xl text-gray-100 mb-8 font-light max-w-xl drop-shadow-md">
-                    A refined beauty destination where elegance, privacy, and expert care come together.
-                </p>
-                <div class="fade-in-up delay-300 flex items-center space-x-4">
-                    <p class="text-nava-rose tracking-widest uppercase text-[10px] sm:text-xs font-bold">Luxury • Privacy • Expertise</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-16 md:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right" class="order-2 md:order-1">
-                <span class="text-nava-rose font-medium tracking-widest uppercase text-xs mb-2 block">Our Story</span>
-                <h2 class="font-serif text-3xl md:text-4xl text-nava-dark mb-6 leading-snug">A Sanctuary of Style & Serenity in Jeddah.</h2>
-                <p class="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
-                    At Nava Salon, we believe beauty is an art and self-care is a necessity. Established with a vision to bring unparalleled luxury to the women of Jeddah.
-                </p>
-                <p class="text-gray-700 leading-relaxed text-sm md:text-base">
-                    Our team of international stylists ensures a bespoke experience that leaves you feeling refreshed and beautiful.
-                </p>
-            </div>
-            <div data-aos="fade-left" class="order-1 md:order-2">
-                <img src="assets/BgNava.png" alt="Salon" class="rounded-lg shadow-xl w-full h-auto object-cover border-4 border-nava-rose/30">
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-16 md:py-24 bg-nava-light/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-nava-rose font-medium tracking-widest uppercase text-xs">The Full Offering</span>
-                <h2 class="font-serif text-4xl md:text-5xl text-nava-dark mt-2">Our World-Class Services</h2>
-                <p class="mt-4 text-lg max-w-3xl mx-auto text-gray-700">
-                    A curated selection of beauty and wellness experiences, crafted for the modern woman.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                
-                <!-- IMPROVEMENT: Reduced max AOS delay to 400ms for better UX on slower devices -->
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="100">
-                    <img src="assets/hair.jpeg" alt="Hair Artistry" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Hair Artistry</h3>
-                            <p class="text-gray-200 text-sm opacity-90">Cut, Color & Style by Experts</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/nails.jpeg" alt="Luxury Nail Care" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Luxury Nail Care</h3>
-                            <p class="text-gray-200 text-sm opacity-90">Manicures, Pedicures & Gel Extensions</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="300">
-                    <img src="assets/spa.jpeg" alt="Private Spa & Hammam" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Private Spa</h3>
-                            <p class="text-gray-200 text-sm opacity-90">Relaxing Massages & Hammam</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="100">
-                    <img src="assets/Facials.jpeg" alt="Advanced Facials" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Advanced Facials</h3>
-                            <p class="text-gray-200 text-sm opacity-90">HydraFacial & Rejuvenation</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/makeup.jpeg" alt="Professional Makeup" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Professional Makeup</h3>
-                            <p class="text-gray-200 text-sm opacity-90">Bridal & Event Glam</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative overflow-hidden rounded-xl shadow-lg group" data-aos="fade-up" data-aos-delay="300">
-                    <img src="assets/Lash.jpeg" alt="Lash & Brow Bar" 
-                         class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-nava-dark/80 to-transparent flex items-end p-6">
-                        <div>
-                            <h3 class="font-serif text-3xl text-white mb-2 leading-tight">Lash & Brow Bar</h3>
-                            <p class="text-gray-200 text-sm opacity-90">Extensions, Lifts & Shaping</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FIX: Removed the mid-body <style> block — styles moved to <head> -->
-    <div class="relative py-10 bg-white overflow-hidden border-t border-b border-nava-gold/10">
-        <div class="flex whitespace-nowrap animate-scroll">
-            <div class="flex items-center space-x-20 px-10">
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Relax</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Refresh</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Renew</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Nava Experience</span>
-            </div>
-            <div class="flex items-center space-x-20 px-10">
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Relax</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Refresh</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Renew</span>
-                <span class="font-serif text-5xl md:text-7xl text-nava-rose/20 uppercase tracking-[0.2em]">Nava Experience</span>
             </div>
         </div>
     </div>
+</section>
 
-    <section id="booking" class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="relative bg-nava-light rounded-3xl p-8 md:p-16 overflow-hidden shadow-sm border border-nava-rose/10" data-aos="zoom-in">
-                <div class="relative z-10 text-center">
-                    <span class="text-nava-rose font-medium tracking-[0.2em] uppercase text-xs mb-4 block">Time to Treat Yourself</span>
-                    <h2 class="font-serif text-3xl md:text-5xl text-nava-dark mb-6 leading-tight">Ready for a <br> New Look?</h2>
-                    <p class="text-gray-600 mb-10 max-w-lg mx-auto text-sm md:text-base leading-relaxed font-light">
-                        Book your appointment today and enjoy a relaxing beauty experience. Our experts are here to make you shine.
-                    </p>
-                    <!-- FIX: Added rel="noopener noreferrer" to target="_blank" link -->
-                    <a href="https://wa.me/966536464555?text=Hi%20Nava%20Salon,%20I'd%20like%20to%20book%20an%20appointment." 
-                       target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center bg-nava-dark text-white px-10 py-5 rounded-full hover:bg-nava-rose transition-all duration-300 transform hover:scale-105 shadow-xl tracking-widest uppercase text-xs font-bold">
-                        <i class="fab fa-whatsapp text-xl mr-3"></i>
-                        Book via WhatsApp
-                    </a>
+<!-- ===== HOURS ===== -->
+<section id="hours" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6" data-aos="fade-up">
+        <div class="text-center">
+            <span class="i18n text-nava-rose font-medium tracking-[0.3em] uppercase text-xs mb-4 block"
+                  data-ar="يسعدنا استقبالكِ" data-en="We Look Forward to Seeing You">يسعدنا استقبالكِ</span>
+            <h2 class="i18n font-serif text-3xl md:text-4xl text-nava-dark mb-12 tracking-wide italic"
+                data-ar="أوقات العمل" data-en="Opening Hours">أوقات العمل</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
+                <div class="md:border-e border-nava-gold/20 px-8">
+                    <p class="i18n text-nava-rose font-sans uppercase tracking-[0.2em] text-[10px] mb-4"
+                       data-ar="السبت إلى الخميس" data-en="Saturday to Thursday">السبت إلى الخميس</p>
+                    <p class="font-serif text-2xl text-nava-dark" id="time-1">١٠:٠٠ ص <span class="text-nava-gold">—</span> ١٠:٠٠ م</p>
+                </div>
+                <div class="px-8">
+                    <p class="i18n text-nava-rose font-sans uppercase tracking-[0.2em] text-[10px] mb-4"
+                       data-ar="الجمعة" data-en="Friday">الجمعة</p>
+                    <p class="font-serif text-2xl text-nava-dark" id="time-2">٠٢:٠٠ م <span class="text-nava-gold">—</span> ١٠:٠٠ م</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="hours" class="py-20 bg-white">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6" data-aos="fade-up">
-            <div class="text-center">
-                <span class="text-nava-rose font-medium tracking-[0.3em] uppercase text-xs mb-4 block">We Look Forward to Seeing You</span>
-                <h2 class="font-serif text-3xl md:text-4xl text-nava-dark mb-12 tracking-wide italic">Opening Hours</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
-                    <div class="md:border-r border-nava-gold/20 px-8">
-                        <p class="text-nava-rose font-sans uppercase tracking-[0.2em] text-[10px] mb-4">Saturday to Thursday</p>
-                        <p class="font-serif text-2xl text-nava-dark">10:00 AM <span class="text-nava-gold">—</span> 10:00 PM</p>
+<!-- ===== LOCATION ===== -->
+<section id="location" class="py-16 md:py-24 bg-nava-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <span class="i18n text-nava-rose uppercase tracking-widest text-xs mb-2 block" data-ar="زوريَنا" data-en="Visit Us">زوريَنا</span>
+                <h2 class="i18n font-serif text-3xl md:text-4xl mb-8" data-ar="جمالكِ يبدأ هنا." data-en="Your Beauty Starts Here.">جمالكِ يبدأ هنا.</h2>
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-map-marker-alt text-nava-rose mt-1 text-xl shrink-0"></i>
+                        <p class="i18n text-gray-700"
+                           data-ar="برج روفان، البوابة الغربية، الدور العاشر، جدة"
+                           data-en="Burj Roufan, West Gate, 10th Floor, Jeddah">برج روفان، البوابة الغربية، الدور العاشر، جدة</p>
                     </div>
-                    <div class="px-8">
-                        <p class="text-nava-rose font-sans uppercase tracking-[0.2em] text-[10px] mb-4">Friday</p>
-                        <p class="font-serif text-2xl text-nava-dark">02:00 PM <span class="text-nava-gold">—</span> 10:00 PM</p>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-phone-alt text-nava-rose mt-1 text-xl shrink-0"></i>
+                        <p class="text-gray-700 font-bold" dir="ltr">+966 53 646 4555</p>
                     </div>
                 </div>
+                <a href="https://maps.app.goo.gl/JBjCx7dADnLGwsHd8" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 bg-nava-dark text-white px-8 py-4 hover:bg-nava-rose transition text-xs tracking-widest uppercase shadow-md">
+                    <span class="i18n" data-ar="احصلي على الاتجاهات" data-en="Get Directions">احصلي على الاتجاهات</span>
+                    <i class="fas fa-external-link-alt icon-flip"></i>
+                </a>
+            </div>
+            <div data-aos="zoom-in" class="w-full h-80 lg:h-full min-h-[350px] rounded-lg overflow-hidden shadow-lg border-4 border-white">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.607537754663!2d39.15873457504705!3d21.562195980223983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3d1cda68b6fe9%3A0xa5d14fad9480fe3b!2z2LXYp9mE2YjZhiDZhtin2YHYpyAtIE5hdmEgc2Fsb24!5e0!3m2!1sen!2ssa!4v1769872603372!5m2!1sen!2ssa"
+                        class="w-full" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-        <!-- FIX: Removed orphaned extra </div> that was here -->
-    </section>
+    </div>
+</section>
 
-    <section id="location" class="py-16 md:py-24 bg-nava-light">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                    <span class="text-nava-rose uppercase tracking-widest text-xs mb-2 block">Visit Us</span>
-                    <h2 class="font-serif text-3xl md:text-4xl mb-8">Your Beauty Starts Here.</h2>
-                    <div class="space-y-6 mb-8">
-                        <div class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-nava-rose mt-1 mr-4 text-xl"></i>
-                            <p class="text-gray-700">Burj Roufan, West Gate, 10th Floor, Jeddah</p>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-phone-alt text-nava-rose mt-1 mr-4 text-xl"></i>
-                            <p class="text-gray-700 font-bold">+966 53 646 4555</p>
-                        </div>
-                    </div>
-                    <!-- FIX: Added rel="noopener noreferrer" -->
-                    <a href="https://maps.app.goo.gl/JBjCx7dADnLGwsHd8" target="_blank" rel="noopener noreferrer"
-                       class="w-full sm:w-auto inline-block bg-nava-dark text-white px-8 py-4 hover:bg-nava-rose transition text-center text-xs tracking-widest uppercase shadow-md">
-                        Get Directions <i class="fas fa-external-link-alt ml-2"></i>
-                    </a>
-                </div>
-                <div data-aos="zoom-in" class="w-full h-80 lg:h-full min-h-[350px] rounded-lg overflow-hidden shadow-lg border-4 border-white">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.607537754663!2d39.15873457504705!3d21.562195980223983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3d1cda68b6fe9%3A0xa5d14fad9480fe3b!2z2LXYp9mE2YjZhiDZhtin2YHYpyAtIE5hdmEgc2Fsb24!5e0!3m2!1sen!2ssa!4v1769872603372!5m2!1sen!2ssa" 
-                            class="w-full" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+<!-- ===== FOOTER ===== -->
+<footer class="bg-nava-dark text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="text-center sm:text-start">
+            <h3 class="font-serif text-nava-rose text-xl mb-4 italic">Nava Salon</h3>
+            <p class="i18n text-gray-400 text-sm"
+               data-ar="حيث تلتقي الأناقة بالخبرة. الوجهة الأولى للتجميل الراقي في جدة."
+               data-en="Where Elegance Meets Expertise. The premier destination for luxury beauty in Jeddah.">حيث تلتقي الأناقة بالخبرة. الوجهة الأولى للتجميل الراقي في جدة.</p>
+            <div class="flex justify-center sm:justify-start gap-4 mt-6">
+                <a href="https://www.instagram.com/navasalon.sa"    target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="https://www.snapchat.com/add/navasalon.sa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-snapchat-ghost text-xl"></i></a>
+                <a href="https://www.tiktok.com/@navasalon.sa"      target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-tiktok text-xl"></i></a>
+                <a href="https://wa.me/966536464555"                target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-whatsapp text-xl"></i></a>
             </div>
         </div>
-    </section>
+        <div class="hidden lg:block">
+            <h3 class="i18n font-serif text-nava-rose text-xl mb-4" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+            <ul class="text-gray-400 text-sm space-y-2">
+                <li><a href="#about"    class="i18n hover:text-white" data-ar="قصتنا"   data-en="Our Story">قصتنا</a></li>
+                <li><a href="#services" class="i18n hover:text-white" data-ar="خدماتنا" data-en="Services">خدماتنا</a></li>
+            </ul>
+        </div>
+        <div class="col-span-1 sm:col-span-2 text-center sm:text-start">
+            <h3 class="i18n font-serif text-nava-rose text-xl mb-4" data-ar="معلومات التواصل" data-en="Contact Info">معلومات التواصل</h3>
+            <p class="i18n text-gray-400 text-sm mb-2 italic"
+               data-ar="برج روفان، البوابة الغربية، الدور العاشر"
+               data-en="Burj Roufan, West Gate, 10th Floor">برج روفان، البوابة الغربية، الدور العاشر</p>
+            <p class="text-gray-400 text-sm"><a href="tel:+966536464555" class="hover:text-white transition-colors" dir="ltr">+966 53 646 4555</a></p>
+        </div>
+    </div>
+    <div class="i18n mt-12 text-center text-gray-600 text-[10px] border-t border-white/5 pt-8"
+         data-ar="© ٢٠٢٥ صالون نافا. جميع الحقوق محفوظة."
+         data-en="© 2025 Nava Salon. All rights reserved.">© ٢٠٢٥ صالون نافا. جميع الحقوق محفوظة.</div>
+</footer>
 
-    <footer class="bg-nava-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div class="text-center sm:text-left">
-                <h3 class="font-serif text-nava-rose text-xl mb-4 italic">Nava Salon</h3>
-                <p class="text-gray-400 text-sm">Where Elegance Meets Expertise. The premier destination for luxury beauty in Jeddah.</p>
-                <div class="flex justify-center sm:justify-start space-x-4 mt-6">
-                    <!-- FIX: Added rel="noopener noreferrer" to all social links -->
-                    <a href="https://www.instagram.com/navasalon.sa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="https://www.snapchat.com/add/navasalon.sa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-snapchat-ghost text-xl"></i></a>
-                    <a href="https://www.tiktok.com/@navasalon.sa" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-tiktok text-xl"></i></a>
-                    <a href="https://wa.me/966536464555" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-nava-rose"><i class="fab fa-whatsapp text-xl"></i></a>
-                </div>
-            </div>
-            <div class="hidden lg:block">
-                <h3 class="font-serif text-nava-rose text-xl mb-4">Links</h3>
-                <ul class="text-gray-400 text-sm space-y-2">
-                    <li><a href="#about" class="hover:text-white">Our Story</a></li>
-                    <li><a href="#services" class="hover:text-white">Services</a></li>
-                </ul>
-            </div>
-            <div class="col-span-1 sm:col-span-2 text-center sm:text-left">
-                <h3 class="font-serif text-nava-rose text-xl mb-4">Contact Info</h3>
-                <p class="text-gray-400 text-sm mb-2 italic">Burj Roufan, West Gate, 10th Floor</p>
-                <!-- FIX: Replaced Cloudflare-obfuscated email with a direct mailto link -->
-                <p class="text-gray-400 text-sm">
-                    <a href="mailto:info@navasalon.sa" class="hover:text-white transition-colors">info@navasalon.sa</a>
-                </p>
-            </div>
-        </div>
-        <!-- FIX: Updated copyright year from 2020 to 2025 -->
-        <div class="mt-12 text-center text-gray-600 text-[10px] border-t border-white/5 pt-8">
-            © 2025 Nava Salon. All rights reserved.
-        </div>
-    </footer>
+<!-- ===== JS ===== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── Mobile Menu ───────────────────────────────────────────────
+    const mobBtn  = document.getElementById('mob-btn');
+    const mobMenu = document.getElementById('mobile-menu');
+    const mobIcon = mobBtn.querySelector('i');
 
-    <script>
-        const btn = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
-        const icon = btn.querySelector('i');
-        
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('translate-x-full');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-            icon.classList.toggle('rotate-90'); 
+    mobBtn.addEventListener('click', () => {
+        mobMenu.classList.toggle('translate-x-full');
+        mobIcon.classList.toggle('fa-bars');
+        mobIcon.classList.toggle('fa-times');
+        mobIcon.classList.toggle('rotate-90');
+    });
+    mobMenu.querySelectorAll('.mob-link').forEach(l => {
+        l.addEventListener('click', () => {
+            mobMenu.classList.add('translate-x-full');
+            mobIcon.className = 'fas fa-bars text-2xl transition-all duration-300';
+        });
+    });
+
+    // ── i18n ──────────────────────────────────────────────────────
+    let lang = 'en';
+
+    function setLang(newLang) {
+        lang = newLang;
+        const html = document.getElementById('html-root');
+        html.setAttribute('lang',  lang);
+        html.setAttribute('dir',   lang === 'ar' ? 'rtl' : 'ltr');
+
+        document.title = lang === 'ar'
+            ? 'صالون نافا جدة | فاخر للتجميل والسبا'
+            : 'Nava Salon Jeddah | Luxury Beauty & Spa';
+
+        // Translate all .i18n elements
+        document.querySelectorAll('.i18n').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            // Use innerHTML to support <br> and icons
+            el.innerHTML = val;
         });
 
-        menu.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('translate-x-full');
-                icon.className = 'fas fa-bars text-2xl transition-all duration-300';
-            });
+        // Update hrefs that differ by language
+        ['nav-book', 'mob-book', 'cta-book'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                const h = el.getAttribute('data-' + lang + '-href');
+                if (h) el.href = h;
+            }
         });
-    </script>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- FIX: Completed the truncated AOS.init() block -->
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 80
+        // Swap time numerals
+        const t1 = document.getElementById('time-1');
+        const t2 = document.getElementById('time-2');
+        if (lang === 'ar') {
+            t1.innerHTML = '١٠:٠٠ ص <span class="text-nava-gold">—</span> ١٠:٠٠ م';
+            t2.innerHTML = '٠٢:٠٠ م <span class="text-nava-gold">—</span> ١٠:٠٠ م';
+        } else {
+            t1.innerHTML = '10:00 AM <span class="text-nava-gold">—</span> 10:00 PM';
+            t2.innerHTML = '02:00 PM <span class="text-nava-gold">—</span> 10:00 PM';
+        }
+
+        // Update active button state
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            const isAr = b.id.startsWith('btn-ar');
+            const isEn = b.id.startsWith('btn-en');
+            if (lang === 'ar') b.classList.toggle('active', isAr);
+            else               b.classList.toggle('active', isEn);
         });
-    </script>
+    }
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true, offset: 80 });
+    setLang('en');
+</script>
 
 </body>
 </html>
