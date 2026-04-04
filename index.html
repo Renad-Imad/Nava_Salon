@@ -45,6 +45,9 @@
         [dir="rtl"] .font-serif { font-family:'Tajawal', serif; font-weight:700; }
         [dir="ltr"] .font-serif { font-family:'Playfair Display', serif; }
 
+        /* Arabic must never have letter-spacing — it breaks the script */
+        [dir="rtl"] * { letter-spacing: 0 !important; }
+
         /* Flip external-link icon in RTL */
         [dir="rtl"] .icon-flip { transform: scaleX(-1); display:inline-block; }
     </style>
